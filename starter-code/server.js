@@ -18,8 +18,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static('./public'));
 
 
-// COMMENT: What is this function doing? Why do we need it? Where does it receive a request from?
+// COMMENT DONE: What is this function doing? Why do we need it? Where does it receive a request from?
 // (put your response in a comment here)
+// This function serves as middleware -- it is completing the request to the GitHub api with the GITHUB_TOKEN stored as an environment variable
+// We need it in order to protect our GITHUB access token and it receives the request orginally from repos.requestRepos, which issues a $.get request
+// and this request route is heard below in app.get('/github/*'), which then calls proxyGitHub
 function proxyGitHub(request, response) {
   console.log('Routing GitHub request for', request.params[0]);
   (requestProxy({
@@ -29,8 +32,11 @@ function proxyGitHub(request, response) {
 }
 
 
-// COMMENT: What is this route doing? Where does it receive a request from?
+// COMMENT DONE: What is this route doing? Where does it receive a request from?
 // (put your response in a comment here)
+// The routes below are listening for the URL change in the client layer, depending on the route
+// will carry out the correspending callback function.
+// In the case of the /new route, it is looking in the file system, in the public directory, for the new.html page and sending it back as a response
 app.get('/new', (request, response) => response.sendFile('new.html', {root: './public'}));
 app.get('/admin', (request, response) => response.sendFile('admin.html', {root: './public'}));
 app.get('/github/*', proxyGitHub);
@@ -106,8 +112,11 @@ app.post('/articles', function(request, response) {
 });
 
 
-// COMMENT: What is this route doing? Where does it receive a request from?
+// COMMENT DONE: What is this route doing? Where does it receive a request from?
 // (put your response in a comment here)
+// This route is targeting a specific article by the id specified in the parameters, and it is
+// updating the article associated with the id.
+// It will receieve the request when the article.updateRecord method is called
 app.put('/articles/:id', (request, response) => {
   client.query(`
     UPDATE authors
