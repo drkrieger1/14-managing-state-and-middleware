@@ -13,7 +13,9 @@ var app = app || {};
 
   const render = Handlebars.compile($('#repo-template').text());
 
-  // COMMENT: What is this function doing? Where is it called? Does it call any other functions, and if so, in what file(s) do those function(s) live?
+  // COMMENT DONE: What is this function doing? Where is it called? Does it call any other functions, and if so, in what file(s) do those function(s) live?
+  // This function first calls the ui function to clear out the ul items, and in its place, it is appending the repos from the user's github.
+  // It is being called in aboutController, when the user clicks on the about link
   repoView.index = function() {
     ui();
 

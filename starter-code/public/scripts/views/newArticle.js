@@ -4,7 +4,10 @@ var app = app || {};
 (function(module) {
   const newArticle = {};
 
-  // COMMENT: What is this function doing? Where is it called? Does it call any other functions, and if so, in what file(s) do those function(s) live?
+  // COMMENT DONE: What is this function doing? Where is it called? Does it call any other functions, and if so, in what file(s) do those function(s) live?
+  // This function is initating our new article page.
+  // Right now, since we have no routes listening for /new, we are not calling this function anywhere.
+  // It calls newArticle.create and newArticle.submit for the newly created article, both live in the same file.
   newArticle.initNewArticlePage = function() {
     $('.tab-content').show();
     $('#export-field').hide();
